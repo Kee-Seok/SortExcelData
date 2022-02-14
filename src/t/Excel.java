@@ -32,7 +32,7 @@ public class Excel {
 	static ArrayList<String> juminBirthArray = new ArrayList<>();
 	static int row;
 	
-	public static void getDataFromAnsys() {
+	public static void getDataFromAnsys() { //안시스 엑셀에서 행의 데이터를 하나씩 가져와서 ArrayList에 각 컬럼값을 넣는다.
 	try {
 		ansysWb = Workbook.getWorkbook(ansysFile);
 		ansysSheet = ansysWb.getSheet(0);
@@ -49,7 +49,7 @@ public class Excel {
 	}
 	}
 	
-	public static void getDataFromJumin() {
+	public static void getDataFromJumin() { //주민센터 엑셀에서 행의 데이터를 하나씩 가져와서 ArrayList에 각 컬럼값을 넣는다.
 	try {
 		juminWb = Workbook.getWorkbook(juminFile);
 		juminSheet = juminWb.getSheet(0);
@@ -64,6 +64,7 @@ public class Excel {
 	}
 	}
 	
+	//말 그대로 엑셀 쓰기인데 안시스 엑셀 데이터를 가져와서 주민센터 엑셀값과 하나씩 비교해가며 일치하면 새로운 엑셀 파일에 새로운 행을 집어넣는다.
 	public static void writeExcel() throws IOException, RowsExceededException, WriteException {
 		getDataFromAnsys();
 		getDataFromJumin();
@@ -72,7 +73,7 @@ public class Excel {
 			WritableWorkbook wb = Workbook.createWorkbook(file);
 			WritableSheet ws = wb.createSheet("실제명단",0);
 			System.out.println(ansysSheet.getRows());
-			for(int i = 0; i < ansysSheet.getRows()-1; i++) {
+			for(int i = 0; i < ansysSheet.getRows()-1; i++) { //안시스 시트에서 이름과 생년월일을 가져온다.
 				ansysNameArray.get(i);
 				ansysBirthArray.get(i);
 				for(int j = 0; j < juminSheet.getRows()-1; j++) {
